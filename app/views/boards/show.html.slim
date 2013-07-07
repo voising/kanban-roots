@@ -1,12 +1,12 @@
 - content_for :head do
-  meta  http-equiv='Refresh' content='300'
+  //meta  http-equiv='Refresh' content='300'
   style
     - @categories.each do |category|
       = '.' + category.name_as_css_class + '{background-color: #' + category.color + '}'
 
 - content_for :project_nav do
   li
-    = link_to 'Clean up Done', clean_up_done_path(@project), :confirm => 'Are you sure?'
+    = link_to t(:clean_up_done), clean_up_done_path(@project), :confirm => t(:are_you_sure)
 
 a#scores-btn.btn.info[data-controls-modal="score-modal" data-keyboard="true" data-backdrop="true"] Scores
 
@@ -20,12 +20,19 @@ a#scores-btn.btn.info[data-controls-modal="score-modal" data-keyboard="true" dat
   h1 #{@project.name} Board
 
 ul.legends
-  strong Legend:
-  li(style="background-color: #ffffa5;") None
+  strong = t(:legend)
+  li(style="background-color: #ffffa5;") = t(:none)
   - @categories.each do |category|
     li(class=category.name_as_css_class)= category.name
 
 .board
+  .division.backlog
+    h3
+      | #{t(:backlog)}&nbsp;
+      = link_to "", new_project_task_path(@project), :class => 'icon-plus-sign'
+    ul#backlog.droppable
+      - @project.tasks_by_position(Board::POSITIONS['backlog']).each do |task|
+        = to_postit(task).html_safe
   - ['todo', 'doing', 'done'].each do |division|
     .division
       - division_name = Board::POSITIONS[division]
@@ -34,10 +41,4 @@ ul.legends
       ul.droppable id=division
         - @project.tasks_by_position(division_name).each do |task|
           = to_postit(task).html_safe
-
-.board
-  h3 Backlog
-  ul#backlog.droppable
-    - @project.tasks_by_position(Board::POSITIONS['backlog']).each do |task|
-      = to_postit(task).html_safe
 

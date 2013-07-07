@@ -21,14 +21,19 @@ test: &test
   database: db/test.sqlite3
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: kanban_roots_production
-  pool: 5
-  username: root
-  password: root
-  socket: /var/run/mysqld/mysqld.sock
+  database: db/prod
+#production:
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  database: kanban_roots_production
+#  pool: 5
+#  username: root
+#  password: root
+#  socket: /var/run/mysqld/mysqld.sock
 
 cucumber:
   <<: *test

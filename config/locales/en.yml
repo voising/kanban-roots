@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  legend: "Legend :"
+  are_you_sure: "Are you sure ?"
+  listing_categories: "Listing %{name} categories"
+  note_github_flavord_markdown: "Note: %{item} are rendered using <a href='http://github.github.com/github-flavored-markdown/'> GitHub Flavored Markdown </a>"

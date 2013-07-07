@@ -1,11 +1,15 @@
 /*
-*= require_tree .
+*= require bootstrap_and_overrides
+*= require token-input-facebook
 *= require_self
 */
 
 body {
     padding-top: 40px;
-    background-color: #EEEEEE;
+}
+body {
+    background-image: url("/assets/roughcloth.png");
+    background-repeat: repeat;
 }
 
 code {
@@ -13,6 +17,9 @@ code {
     padding: 0;
 }
 
+.collapse {
+    overflow: hidden;
+}
 .clear:after {
     content: ".";
     height: 0;
@@ -42,6 +49,21 @@ textarea.monospace {
     border-radius: 3px;
 }
 
+.website-title {
+    float: left;
+    display: block;
+    height: 41px;
+    line-height: 41px;
+    font-size: 1.4rem;
+    margin-right: 38px;
+    margin-left: 38px;
+    color: #000;
+}
+.website-title:hover {
+    color: #FFF;
+    text-decoration: none;
+}
+
 /* Twitter bootstrap overwrite */
 
 .btn {
@@ -50,6 +72,7 @@ textarea.monospace {
 
 .container {
     width: 1235px;
+    width: 95%;
 }
 
 .help-block {
@@ -78,11 +101,6 @@ input[type="email"],
 select,
 textarea {
     margin-left: 10px !important;
-}
-
-.actions {
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 4px 4px 4px 4px;
 }
 
 blockquote p {
@@ -193,8 +211,11 @@ ul.token-input-list-facebook {
 div.board {
     display: table;
     width: 1174px;
+    width: 100%;
     margin: 10px;
+    /*
     border: solid 2px #bfbfbf;
+    */
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -khtml-border-radius: 10px;
@@ -211,6 +232,13 @@ div.board h3 {
 div.division {
     float: left;
     width: 390px;
+    width: 26.6666%;
+}
+
+div.backlog {
+    width: 20%;
+    height: 100%;
+    text-align: center;
 }
 
 div.board ul {
@@ -219,6 +247,24 @@ div.board ul {
 }
 
 .postit {
+    cursor: pointer;
+    float: left;
+    margin: 7px 7px 7px 31px;
+    width: 190px;
+    text-align: center;
+    color: black;
+    background-color: #ffffa5;
+    box-shadow: 0 4px 6px #888888;
+    -moz-box-shadow: 0 4px 6px #888888;
+    -webkit-box-shadow: 0 4px 6px #888888;
+    list-style: none;
+}
+.postit:hover .uid {
+    display: block;
+}
+
+.real-postit {
+    cursor: pointer;
     float: left;
     padding: 7px 10px;
     margin: 7px;
@@ -226,19 +272,27 @@ div.board ul {
     text-align: center;
     color: black;
     background-color: #ffffa5;
-    box-shadow: 3px 3px 3px #888;
-    -moz-box-shadow: 3px 3px 3px #888;
-    -webkit-box-shadow: 3px 3px 3px #888;
+    box-shadow: 0 4px 6px #888888;
+    -moz-box-shadow: 0 4px 6px #888888;
+    -webkit-box-shadow: 0 4px 6px #888888;
     list-style: none;
 }
 
+.backlog .postit {
+  display: inline-block;
+  float: none;
+  margin: 7px auto;
+}
+
 .postit a.title {
-    display: block;
-    height: 53px;
-    margin: 20px 0 10px 0;
-    padding: 0px;
-    color: inherit;
+    padding: 0 8px;
+    line-height: 12px;
     background-color: inherit;
+    color: inherit;
+    display: block;
+    font-weight: 700;
+    margin: 6px auto;
+    text-decoration: none;
 }
 
 .postit p {
@@ -259,17 +313,40 @@ div.board ul {
 
 p.postit_top {
     min-height: 16px;
+    position: absolute;
+    width: 100%;
+}
+.postit_bottom {
+    position: absolute;
+    bottom: 2px;
+    width: 90%;
 }
 
 .postit p.postit_top .comments_number {
     float: right;
     color: gray;
+    display: none;
 }
 
 .postit p.postit_top span.show_points {
+    color: gray;
     cursor: pointer;
-    float: left;
-    padding: 0px 7px;
+    float: right;
+    padding: 0 7px;
+}
+.postit span.uid {
+    display: none;
+    color: gray;
+    font-size: 9px;
+    left: 11px;
+    letter-spacing: 2px;
+    position: absolute;
+    top: 1px;
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .postit p.postit_top span.show_points:hover {
@@ -279,20 +356,40 @@ p.postit_top {
 
 select.points_select {
     display: none;
-    float: left;
-    width: auto;
     height: 25px !important;
     margin-left: 3px !important;
+    position: absolute;
+    right: 0;
+    width: auto;
 }
 
 div.assignees_block {
-    float: right;
+    left: -28px;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    text-align: left;
+}
+div.assignees_block img {
+    height: 24px;
+    width: 24px;
+}
+
+.assignees_block .icon-user {
+    display: none;
+    padding: 7px 0 0 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.division:hover .assignees_block .icon-user {
+    display: block;
 }
 
 p.show_assignees {
-    text-align: right;
     cursor: pointer;
-    padding: 0 5px;
+    height: 24px;
+    width: 24px;
 }
 
 p.show_assignees:hover {
@@ -303,6 +400,7 @@ p.show_assignees:hover {
 .assignees_form {
     position: absolute;
     display: none;
+    z-index: 2;
     padding: 5px;
     background-color: #FFFFFF;
     border: solid 1px #e6e6fa;
@@ -323,16 +421,28 @@ div.assignees_form input[type="submit"] {
 
 div.postit_options_block {
     float: left;
+    margin-left: 2px;
+    display: none;
+}
+li:hover div.postit_options_block {
+    display: block;
+}
+div.postit_options_block a {
+    color: #000
+}
+div.postit_options_block a:hover {
+    color: #0069D6
 }
 
 a.postit_options {
     display: block;
     height: 16px;
     width: 16px;
-    background: transparent url(/assets/options.png) no-repeat scroll 0px 50%;
+    text-decoration: none;
 }
 
 .postit_bottom ul.postit_options_list {
+    z-index: 2;
     position: absolute;
     display: none;
     padding: 3px 8px;
@@ -343,6 +453,12 @@ a.postit_options {
     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3);
     text-align: left;
     list-style: none;
+}
+
+.postit-content {
+  margin-bottom: 14px;
+  padding: 7px;
+  text-align: left;
 }
 
 /* Board score */
@@ -395,6 +511,7 @@ ul.legends li {
 
 .task-info-description {
     padding: 10px;
+    min-height: 275px;
 }
 
 .task-info-description *> pre {
@@ -405,15 +522,16 @@ ul.legends li {
     width: 75%;
     float: left;
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
 }
 
 .task-info-assignees {
     color: #FFFFFF;
     background-color: #339BB9;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    padding: 8px;
+    padding: 3px 8px;
     border-radius: 2px 2px 0 0;
+    font-size: 0.7rem;
 }
 
 .task-info-date {
@@ -448,11 +566,15 @@ ul.legends li {
 /* Comments */
 
 .comment-wrapper {
-    margin: 5px 20px 20px 60px;
-    width: 750px;
+    margin: 30px 20px 20px 60px;
     border: solid 1px #e6e6fa;
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    width: 750px;
+    width: 71%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .comment-info {
@@ -504,4 +626,121 @@ ul.legends li {
 
 .comment-avatar {
     float: left;
+}
+
+div.board h3 {
+    font-family: 'Permanent Marker', cursive;
+    font-weight: 400;
+    font-size: 23px;
+    margin-bottom: 6px;
+}
+div.new-task {
+    display: inline-block;
+    vertical-align: top;
+    min-width: 620px;
+}
+div.block-right {
+    margin-left: 30px;
+}
+div.file {
+    padding: 30px 0 0 138px;
+}
+
+div.file input {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+div.file input:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+    outline: 0 none;
+}
+
+.up-avatar {
+    clear: both;
+    display: block;
+    min-height: 35px;
+    width: 100%;
+}
+.up-avatar input {
+    margin: 0 0 0 9px;
+}
+.up-avatar input[type="checkbox"] {
+    margin: 8px 0 0 8px;
+}
+
+#edit_contributor img {
+    display: block;
+    margin: 0 0 10px 139px;
+}
+
+.task h1, .task h2 {
+    cursor: pointer;
+}
+
+/* SOME FIXES */
+
+label[for="contributor_remember_me"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 0 0px 13px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+
+/* SOME ADDS */
+
+#add_many_tasks textarea {
+    height: 400px;
+}
+.postit-content input[type="checkbox"] {
+    margin: 0;
+}
+
+html, body, body > .container, .content, .board, .division {
+    /*
+    */
+    min-height: 100%;
+}
+
+#category_category_id {
+    display: block;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .topbar {
+        position: absolute;
+    }
+    .container .nav {
+        display: none;
+    }
+    div.division {
+        width: 100%;
+    }
+    div.backlog {
+        max-height: 300px;
+        overflow: auto;
+        text-align: center;
+    }
+    div.board ul {
+        margin: auto;
+        width: 204px;
+    }
+    div.new-task {
+        display: block;
+        vertical-align: top;
+        width: 100%;
+    }
+    label {
+        width: 84px;
+    }
+    input.span8, textarea.span8 {
+        width: 250px;
+    }
+    div.file {
+        padding: 0 0 0 93px;
+    }
 }

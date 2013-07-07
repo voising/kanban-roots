@@ -11,10 +11,7 @@ module ApplicationHelper
   end
 
   def markdown_note(item)
-    "Note: #{item} are rendered using
-     <a href='http://github.github.com/github-flavored-markdown/'>
-       GitHub Flavored Markdown
-     </a>"
+    t(:note_github_flavord_markdown, :item => item)
   end
 
   # TODO: Test it!

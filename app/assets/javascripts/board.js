@@ -11,6 +11,19 @@ function sort_score_list() {
   $('#score_list').html(ordered_list);
 }
 
+function openSelect(element) {
+    console.log(element);
+    var worked = false;
+    if (document.createEvent) { // all browsers
+        var e = document.createEvent("MouseEvents");
+        e.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        worked = element.dispatchEvent(e);
+    } else if (element.fireEvent) { // ie
+        worked = element.fireEvent("onmousedown");
+    }
+    console.log('It worked : '+worked);
+}
+
 function update_score_points(contributors, score) {
   $.each(contributors, function(index, id) {
     contributor = $('#contributor_'.concat(id));
@@ -37,7 +50,7 @@ $(function() {
   // let the post-its be draggable
   $('.postit').draggable({
     cursor: 'move',
-    helper: 'clone',
+    //helper: 'clone',
     revert: 'invalid'
   });
 
@@ -47,6 +60,7 @@ $(function() {
         accept: $accepted_by[value.id],
         hoverClass: 'ui-state-hover',
         drop: function(event, ui) {
+          ui.draggable.css({left:0, top:0});
           movePostit(ui.draggable, $(value));
           defineHeight();
         }
@@ -59,7 +73,11 @@ $(function() {
   $(".show_points").click(function () {
     var task = $(this).parents('li'),
         select = task.find('.points_select');
-    select.fadeToggle("fast");
+    select.fadeToggle("fast", function (){
+        //select.mousedown();
+            openSelect(select[0]);
+      }
+    );
   });
 });
 
@@ -140,10 +158,32 @@ $(function() {
     });
     form.fadeToggle("fast");
   });
+  $('li input[type="checkbox"]').click(function(){
+      var that = this;
+      var parent_li = $(this).closest('li');
+      var task_id = parent_li.attr('id');
+      var which_one = 0;
+      parent_li.find('input').each(function(i){
+         if (this == that)
+           which_one = i;
+      });
+      console.log('ID IS :: '+ task_id);
+      console.log('CHECKED IS :: '+ this.checked);
+      console.log('NUMBER IS :: '+ which_one);
+
+      $.ajax({
+          type: "PUT",
+          url: "/tasks/update_checkbox",
+          data: ({task_id: task_id, checked: this.checked, pos: which_one}),
+          dataType: 'json',
+          success: function(data) {
+          }
+      });
+    });
 });
 
 // move the post-its between the board divisions
-function movePostit (postit, ul) {
+function movePostit(postit, ul) {
   var task_id = postit.attr('id'),
       new_position = ul.attr('id')
 
@@ -168,16 +208,17 @@ function movePostit (postit, ul) {
   });
 }
 
+
 function defineHeight() {
   var max_line_number = 0,
-      division_postit_per_line = 2,
+      division_postit_per_line = 1,
       backlog_postit_per_line = 6,
       postit_height = $('.postit').get(0)? $('.postit').get(0).clientHeight : null,
-      postit_margin = 14,
+      postit_margin = 20,
       // TODO: Make this work
       // margin_top + margin_bottom == margin * 2
       // postit_margin = $('.postit').css('margin') * 2,
-      divisions = [$('#todo'), $('#doing'), $('#done')]
+      divisions = [$('#backlog'), $('#todo'), $('#doing'), $('#done')]
 
   // get the maximum divisions height
   $.each(divisions, function(index, division) {
@@ -187,6 +228,7 @@ function defineHeight() {
     }
   });
 
+  console.log(max_line_number + ' ' + postit_height);
   // set the divisions height as the maximum height
   $.each(divisions, function(index, division) {
     division.css('height', function(index, value) {

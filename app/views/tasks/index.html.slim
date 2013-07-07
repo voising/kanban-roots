@@ -1,11 +1,11 @@
 .page-header
-  h1 Listing tasks
+  h1 = t(:listing_tasks)
 
-table.zebra-striped
+table.table.table-hover.table-condensed
   tr
-    th Title
+    th = t('activerecord.attributes.task.title')
     th Points
-    th Category
+    th = t('activerecord.attributes.task.category')
     th Position
     th
     th
@@ -13,12 +13,12 @@ table.zebra-striped
 
   - @tasks.each do |task|
     tr
-      td= task.title
+      td= link_to task.title, project_task_path(@project, task)
       td= task.points
       td= task.category.name if task.category
       td= task.position
-      td= link_to 'Show', project_task_path(@project, task)
-      td= link_to 'Edit', edit_project_task_path(@project, task)
-      td= link_to 'Destroy', project_task_path(@project, task), \
-                            :confirm => 'Are you sure?', :method => :delete
+      td= link_to t(:show), project_task_path(@project, task)
+      td= link_to t(:edit), edit_project_task_path(@project, task)
+      td= link_to t(:destroy), project_task_path(@project, task), \
+                            :confirm => t(:are_you_sure), :method => :delete
 

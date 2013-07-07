@@ -3,8 +3,8 @@
 
 = render 'form'
 
-= link_to 'Destroy', project_path(@project), \
-                    :class => 'btn danger', \
-                    :confirm => 'Are you sure?', \
+= link_to t(:destroy), project_path(@project), \
+                    :class => 'btn btn-danger', \
+                    :confirm => t(:are_you_sure), \
                     :method => :delete
 

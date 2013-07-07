@@ -1,0 +1,6 @@
+div class='collapse' id='import_tasks'
+  = form_tag '/projects/' + @project.id.to_s + '/tasks/import', :multipart => true do
+    .file
+      = file_field_tag :file, 'data-toggle' => "tooltip", :title => t(:import_a_xml_file), :class => 'tt'
+    .actions
+      = submit_tag t(:import), :class => 'btn primary'

@@ -2,13 +2,14 @@ class Contributor < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :validatable
 
+  mount_uploader :avatar, AvatarUploader
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
 
   # Setup accessible (or protected) attributes for your model (devise stuff)
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me,
-                  :username, :login
+                  :username, :login, :avatar
 
   has_many :own_projects, :class_name => 'Project', :foreign_key => :owner_id, :dependent => :destroy
   has_and_belongs_to_many :contributions, :class_name => 'Project', :join_table => :contributors_projects
@@ -21,6 +22,10 @@ class Contributor < ActiveRecord::Base
 
   def projects
     (own_projects + contributions).sort { |x, y| y[:updated_at] <=> x[:updated_at] }
+  end
+
+  def initials
+    self.username.gsub(/(\w)\w+ (\w)\w+/, '\1.\2').gsub(/(\w)\w+/, '\1')
   end
 
   protected
@@ -66,6 +71,8 @@ class Contributor < ActiveRecord::Base
     end
     record
   end
+
+
 
   def self.find_record(login)
     where(["username = :value OR email = :value", { :value => login }]).first

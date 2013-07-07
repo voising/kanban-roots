@@ -1,0 +1,13 @@
+- if @xml
+  - for task in @xml.root.search('Task')
+    = task.search('Name').text
+
+  // Get a text
+    = gecko['Name']
+    puts "\t" + gecko.xpath("./espece").text
+    puts "\t" + gecko.xpath("./periode").text
+    puts "\t" + gecko.xpath("./region").text
+    puts "\t" + gecko.xpath("./taille").text
+    puts "\t" + gecko.xpath("./couleur").text
+    puts "\n"
+

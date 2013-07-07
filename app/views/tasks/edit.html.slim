@@ -1,7 +1,7 @@
 .page-header
-  h1 Editing task
+  h1 = t(:editing_task)
 
 = render 'form'
 
-= link_to 'Show', project_task_path, :class => 'btn'
+= link_to t(:show), project_task_path, :class => 'btn'
 

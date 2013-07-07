@@ -1,11 +1,11 @@
 .page-header
-  h1 Sign up
+  h1 = t(:sign_up)
 
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
 
   = f.input :name, :input_html => { :autofocus => true }
 
-  = f.input :username, :hint => 'just letters, numbers and _'
+  = f.input :username, :hint => t(:username_hint)
 
   = f.input :email, :label => 'E-mail', :required => true
 
@@ -14,7 +14,7 @@
   = f.input :password_confirmation, :as => :password, :required => true
 
   .actions
-    = f.submit "Sign up", :class => 'btn primary'
+    = f.submit t(:sign_up), :class => 'btn primary'
 
 = render :partial => "devise/shared/links"
 

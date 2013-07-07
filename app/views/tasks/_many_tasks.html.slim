@@ -1,0 +1,6 @@
+div class='collapse' id='add_many_tasks'
+  = form_tag '/projects/' + @project.id.to_s + '/tasks/add_many_tasks'
+    = collection_select :category, :category_id, @categories, :id, :name,{prompt: t(:no_default_category)}, :label => t(:category)
+    = text_area_tag :list, nil, :class => 'span8'
+    .actions
+      = submit_tag t(:save), :class => 'btn primary'

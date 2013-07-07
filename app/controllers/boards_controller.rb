@@ -12,7 +12,7 @@ class BoardsController < InheritedResources::Base
   def clean_up_done
     @project = Project.find(params[:project_id])
     @project.clean_up_done_tasks
-    flash[:notice] = 'Done division was cleaned up.'
+    flash[:notice] = t(:done_division_was_cleaned_up)
     redirect_to :action => :show, :project_id => @project.id
   end
 

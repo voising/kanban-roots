@@ -2,9 +2,9 @@
 
   = f.input :name, :input_html => { :autofocus => true }
   = f.input :description, :input_html => {:class => :span7}
-  = f.input :contributor_tokens, :label => 'Contributors', \
+  = f.input :contributor_tokens, :label => t(:contributors), \
             :input_html => { 'data-pre' => @project.contributors_for_token_input }
 
   .actions
-    = f.submit 'Save', :class => 'btn primary'
+    = f.submit t(:save), :class => 'btn primary'
 

@@ -1,5 +1,11 @@
-.page-header
-  h1 New task
-
+.page-header.task
+  h2 data-toggle="collapse" data-target="#new_task" = t(:new_task)
 = render 'form'
 
+.page-header.task
+  h2 data-toggle="collapse" data-target="#add_many_tasks" = t(:add_many_tasks)
+= render 'many_tasks'
+
+.page-header.task
+  h2 data-toggle="collapse" data-target="#import_tasks" = t(:import_tasks)
+= render 'import'

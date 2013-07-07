@@ -1,10 +1,10 @@
 .page-header
-  h1= "Listing #{@project.name} categories"
+  h1 = t(:listing_categories, :name => @project.name)
 
-table.zebra-striped
+table.table.table-striped
   tr
-    th Name
-    th Color
+    th = t('simple_form.labels.category.name')
+    th = t('simple_form.labels.category.color')
     th
     th
 
@@ -12,8 +12,8 @@ table.zebra-striped
     tr
       td= category.name
       td(style="background-color:##{category.color}")= category.color
-      td= link_to 'Edit', edit_project_category_path(@project, category)
-      td= link_to 'Destroy', project_category_path(@project, category), :confirm => 'Are you sure?', :method => 'delete'
+      td= link_to t(:edit), edit_project_category_path(@project, category)
+      td= link_to t(:destroy), project_category_path(@project, category), :confirm => t(:are_you_sure), :method => 'delete'
 
-= link_to 'New Category', new_project_category_path, :class => 'btn primary'
+= link_to t(:new_category), new_project_category_path, :class => 'btn primary'
 

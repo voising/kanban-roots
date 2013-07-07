@@ -3,29 +3,30 @@
     = @task.title
     '
     small
-      ' by #{@task.author.name}
+      ' #{t(:created_by)} #{@task.author.name}
       span.task-info-date
-        = @task.created_at.strftime 'at %d-%m-%Y'
+        = l(@task.created_at.to_date, :formats => :default)
 
 .task-info-wrapper.clear
   .task-info-principal
+    .task-info-description
+      = @task.description.empty? ? t(:no_description_given) : markdown(@task.description)
+
     .task-info-assignees
       p
         - if !@task.contributors.empty?
-          ' Assigned to
+          ' #{t(:assigned_to)}
           strong
             = @task.contributors.collect(&:name).to_sentence
         - else
-          strong No one is assigned
+          strong #{t(:no_one_is_assigned)}
 
-    .task-info-description
-      = @task.description.empty? ? 'No description given.' : markdown(@task.description)
 
   .task-info-side
     - if @task.category
       p.task-info-category[style="background-color:##{@task.category.color};"] #{@task.category.name}
     - else
-      p.task-info-category[style="background-color:#ffffa5;"] None
+      p.task-info-category[style="background-color:#ffffa5;"] #{t(:none)}
 
     p
       - if @task.points
@@ -33,21 +34,18 @@
           ' #{@task.points}
         | point#{ 's' if !@task.points == 1 }
       - else
-        | No punctuated yet
+        | #{t(:no_punctuated_yet)}
 
     p
       - if @task.position
-        ' At
-        strong
-          ' #{@task.position}
-        | position
+        strong = @task.position
       - else
         | Out of the board
 
 .task-actions
-  = link_to 'Edit', edit_project_task_path(@project, @task), :class => 'btn primary'
-  = link_to 'Destroy', project_task_path(@project, @task), \
-                      :class => 'btn danger', \
+  = link_to t(:edit), edit_project_task_path(@project, @task), :class => 'btn primary'
+  = link_to t(:destroy), project_task_path(@project, @task), \
+                      :class => 'btn btn-danger', \
                       :confirm => 'Are you sure?', \
                       :method => :delete
 

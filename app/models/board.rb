@@ -1,12 +1,13 @@
+# encoding: UTF-8
 class Board
 
   # XXX Hugo: Maybe this constants should be at Task model
 
-  POSITIONS = {'backlog' => 'Backlog',
-               'todo' => 'To Do',
-               'doing' => 'Doing',
-               'done' => 'Done',
-               'out' => 'Out'}
+  POSITIONS = {'backlog' => 'A faire',
+               'todo' => "A faire aujourd'hui",
+               'doing' => 'En cours',
+               'done' => 'Fait',
+               'out' => 'Archivé'}
 
 end
 

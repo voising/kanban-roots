@@ -1,7 +1,8 @@
 //= require jquery
-//= require jquery-ui
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require jscolor/jscolor
+//= require twitter/bootstrap
 //= require_self
 //= require_tree .
 
@@ -13,5 +14,13 @@ $(function() {
         noResultsText: 'No contributors',
         theme: 'facebook'
     });
+
+    $('.close').on('click', function(){
+       $(this).parent().fadeOut('fast');
+    });
+
+    $('.tt').tooltip({placement:'right'});
+    $('.dropdown-toggle').dropdown();
+    //$(".collapse").collapse();
 });
 

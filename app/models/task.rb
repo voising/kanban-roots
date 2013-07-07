@@ -4,7 +4,9 @@ class Task < ActiveRecord::Base
   has_and_belongs_to_many :contributors, :join_table => :contributors_tasks
   has_many :comments, :dependent => :delete_all
 
-  POINTS = [0, 1, 2, 3, 5, 8, 13]
+  attr_accessible :description, :title, :points, :category_id, :position, :contributor_ids, :author_id, :project_id
+
+  POINTS = [0, 1, 2, 3, 4, 5, 8, 13]
 
   validates_presence_of :title, :project_id
 
