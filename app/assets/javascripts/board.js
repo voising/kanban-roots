@@ -34,6 +34,33 @@ function update_score_points(contributors, score) {
   });
 }
 
+function filterByCategory(categ) {
+    var lis = $('.droppable').find('li');
+    var i = lis.length;
+    lis.slideDown('fast', function(){
+        if (!--i) {
+            $.each(lis, function(k, val){
+                if (val.className.indexOf(categ) == -1) {
+                    $(val).slideUp('fast');
+                }
+            });
+        }
+    });
+}
+function filterByUserId(id) {
+    var lis = $('.droppable').find('li');
+    var i = lis.length;
+    lis.slideDown('fast', function(){
+        if (!--i) {
+            $.each(lis, function(k, val){
+                if (!$(val).find('option[selected="selected"][value="'+id+'"]').length) {
+                    $(val).slideUp('fast');
+                }
+            });
+        }
+    });
+}
+
 $(function() {
   var $todo = $('#todo'),
       $doing = $('#doing'),
@@ -185,7 +212,13 @@ $(function() {
     /* FILTERS */
 
     $('.content').find('.filters').find('li').on('click', function(){
-
+      var categ = this.className;
+      if (!categ || categ != 'my-tasks') {
+        filterByCategory(categ);
+      } else {
+        var id = $('li.my-tasks').first()[0].id.match(/\d+/);
+        filterByUserId(id);
+      }
     });
 
   /* HANDLE MODAL FOR TASKS */
