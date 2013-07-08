@@ -237,11 +237,13 @@ function defineHeight() {
   });
 
   // set the backlog height
+    /*
   backlog = $('#backlog');
   line_number = Math.ceil(backlog.children().length / backlog_postit_per_line);
   backlog.css('height', function(index, value) {
     return line_number * ( postit_height + postit_margin );
   });
+  */
 }
 
 // define the divisions and board height on page load

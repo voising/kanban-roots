@@ -130,3 +130,4 @@ fr:
   default_category: "Catégorie par défaut"
   no_default_category: "Aucune catégorie par défaut"
   no_description_given: "Pas de description"
+  are_you_sure_to_archive: "Êtes-vous sûr(e) de vouloir archiver les tâches accomplies"
