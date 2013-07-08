@@ -180,6 +180,48 @@ $(function() {
           }
       });
     });
+
+
+    /* FILTERS */
+
+    $('.content').find('.filters').find('li').on('click', function(){
+
+    });
+
+  /* HANDLE MODAL FOR TASKS */
+  $('.droppable li').on('dblclick', function(e){
+      url = $(this).find('a.title').attr('href');
+      $('#task-modal').data('url', url);
+      $.get(url, function(data) { $('#task-modal').html(data).modal(); });
+  });
+  $('.droppable li').on('click', function(e){
+      if (event.altKey) {
+        $(this).trigger('dblclick');
+      }
+  });
+  $('.backlog').find('h3 a').on('click', function(e){
+        e.preventDefault();
+      $('#task-modal').data('url', this.href);
+      $.get(this.href, function(data) { $('#task-modal').html(data).modal(); });
+  });
+  $('#task-modal').on('submit', 'form', function(e){
+      e.preventDefault();
+      console.log('NICKEL');
+      url = this.action;
+      $.ajax({
+          url: url,
+          type: "POST",
+          data: $(this).serialize(),
+          dataType: "html"
+      }).done(function(){
+          $.get($('#task-modal').data('url'), function(data) { $('#task-modal').html(data).modal(); });
+      });
+  });
+    $('#task-modal').on('hide', function(){
+       if ($(this).data('url').indexOf('new') != -1) {
+           location.reload();
+       }
+    });
 });
 
 // move the post-its between the board divisions
@@ -228,7 +270,7 @@ function defineHeight() {
     }
   });
 
-  console.log(max_line_number + ' ' + postit_height);
+  //console.log(max_line_number + ' ' + postit_height);
   // set the divisions height as the maximum height
   $.each(divisions, function(index, division) {
     division.css('height', function(index, value) {

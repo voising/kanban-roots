@@ -8,16 +8,21 @@
   li
     = link_to t(:clean_up_done), clean_up_done_path(@project), :confirm => t(:are_you_sure_to_archive)
 
-a#scores-btn.btn.info[data-controls-modal="score-modal" data-keyboard="true" data-backdrop="true"] Scores
 
-#score-modal.modal.fade
+//a#scores-btn.btn.info[data-target="#score-modal" data-toggle="modal" data-keyboard="true" data-backdrop="true"] Scores
+
+//#score-modal.modal.fade
   h3 Scores
   ol#score_list
     - @project.contributors_scores.each do |item|
       li #{item[:contributor].username} (<span id="contributor_#{item[:contributor].id}">#{item[:scores]}</span>)
 
+#task-modal.task-modal.modal.fade
+
 .page-header
   h1 #{@project.name} Board
+
+= render 'filters'
 
 ul.legends
   strong = t(:legend)
@@ -41,4 +46,6 @@ ul.legends
       ul.droppable id=division
         - @project.tasks_by_position(division_name).each do |task|
           = to_postit(task).html_safe
+
+
 

@@ -1,0 +1,5 @@
+ul.filters.legends
+  strong = t(:filters)
+  li(style="background-color: #ffffa5;") = t(:none)
+  - @categories.each do |category|
+    li(class=category.name_as_css_class)= category.name

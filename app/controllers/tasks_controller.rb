@@ -1,5 +1,6 @@
 class TasksController < InheritedResources::Base
   respond_to :html, :xml, :json
+  layout :get_layout
   before_filter :authenticate_contributor!
 
   belongs_to :project
@@ -8,6 +9,7 @@ class TasksController < InheritedResources::Base
     show! do
       @project = @task.project
       @comment = Comment.new
+      @ajax = request.xhr?
     end
   end
 
@@ -82,5 +84,9 @@ class TasksController < InheritedResources::Base
     task.save
     render :text => task.to_json
   end
+
+    def get_layout
+      request.xhr? ? nil : 'application'
+    end
 end
 

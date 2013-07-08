@@ -131,3 +131,6 @@ fr:
   no_default_category: "Aucune catégorie par défaut"
   no_description_given: "Pas de description"
   are_you_sure_to_archive: "Êtes-vous sûr(e) de vouloir archiver les tâches accomplies"
+  create_your_first_project: "Créez votre premier projet"
+  no_project: "Vous n'avez pas de projet."
+  filters: "Filtres"

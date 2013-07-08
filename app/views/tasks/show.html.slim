@@ -21,26 +21,24 @@
         - else
           strong #{t(:no_one_is_assigned)}
 
-
-  .task-info-side
-    - if @task.category
-      p.task-info-category[style="background-color:##{@task.category.color};"] #{@task.category.name}
-    - else
-      p.task-info-category[style="background-color:#ffffa5;"] #{t(:none)}
-
-    p
-      - if @task.points
-        strong
-          ' #{@task.points}
-        | point#{ 's' if !@task.points == 1 }
+  - unless @ajax
+    .task-info-side
+      - if @task.category
+        p.task-info-category[style="background-color:##{@task.category.color};"] #{@task.category.name}
       - else
-        | #{t(:no_punctuated_yet)}
-
-    p
-      - if @task.position
-        strong = @task.position
-      - else
-        | Out of the board
+        p.task-info-category[style="background-color:#ffffa5;"] #{t(:none)}
+      p
+        - if @task.points
+          strong
+            ' #{@task.points}
+          | point#{ 's' if !@task.points == 1 }
+        - else
+          | #{t(:no_punctuated_yet)}
+      p
+        - if @task.position
+          strong = @task.position
+        - else
+          | Out of the board
 
 .task-actions
   = link_to t(:edit), edit_project_task_path(@project, @task), :class => 'btn primary'
