@@ -20,6 +20,7 @@ fr:
       long_ordinal: "%e %B %Y"
       only_day: "%e"
       complete: "%A %d %B %H:%M"
+  admin: "Admin"
   new_project: "Nouveau projet"
   hello: "Hello world"
   backlog: "Tâches"
@@ -135,3 +136,11 @@ fr:
   no_project: "Vous n'avez pas de projet."
   filters: "Filtres"
   my_tasks: "Mes tâches"
+  many_task_example: |
+    Installation du projet en local
+     [] Récupérer le code
+     [] Installer la BDD
+    Ajout module authentification
+    Gestion du SEO
+    Cron
+     Mise à jour du catalogue à mettre en place tous les jours à 10h

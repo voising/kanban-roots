@@ -216,7 +216,7 @@ $(function() {
       if (!categ || categ != 'my-tasks') {
         filterByCategory(categ);
       } else {
-        var id = $('li.my-tasks').first()[0].id.match(/\d+/);
+        var id = this.id.match(/\d+/);
         filterByUserId(id);
       }
     });
