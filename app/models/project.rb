@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :owner, :class_name => 'Contributor'
   has_and_belongs_to_many :contributors, :join_table => :contributors_projects
-  has_many :tasks, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy, :order => 'category_id ASC'
   has_many :categories, :dependent => :delete_all
 
   validates_presence_of :name, :owner_id
