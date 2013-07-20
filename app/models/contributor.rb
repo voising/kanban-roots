@@ -9,7 +9,7 @@ class Contributor < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model (devise stuff)
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me,
-                  :username, :login, :avatar
+                  :username, :login, :avatar, :avatar_cache, :remove_avatar
 
   has_many :own_projects, :class_name => 'Project', :foreign_key => :owner_id, :dependent => :destroy
   has_and_belongs_to_many :contributions, :class_name => 'Project', :join_table => :contributors_projects

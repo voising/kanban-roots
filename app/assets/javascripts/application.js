@@ -22,5 +22,28 @@ $(function() {
     $('.tt').tooltip({placement:'right'});
     $('.dropdown-toggle').dropdown();
     //$(".collapse").collapse();
+
+
+    /*** NAVBAR ***/
+
+    if (document.location.href.indexOf('board') != -1) {
+        var allowNavBarToMoveAway = true;
+        $('.navbar-inner').hover(function(){
+            allowNavBarToMoveAway = false;
+            $(this).stop().animate({marginTop: '0'});
+        }, function(){
+            allowNavBarToMoveAway = true;
+            that = $(this);
+            setTimeout(function(){
+                if (allowNavBarToMoveAway) {
+                    that.stop().animate({marginTop: '-35px'});
+                }
+            }, 2000);
+        });
+
+        setTimeout(function(){
+            $('.navbar-inner').animate({marginTop: '-35px'});
+        }, 2000);
+    }
 });
 
