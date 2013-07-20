@@ -23,6 +23,7 @@ gem 'bootswatch-rails'
 # Just a faster web server
 gem 'thin'
 gem "fog", "~> 1.3.1"
+gem "less-rails", "~> 2.3.3"
 
 group :assets do
   gem 'therubyracer' # JavaScript runtime. uglifier dependence
@@ -56,5 +57,4 @@ group :development do
   gem 'annotate'
 
   gem 'quiet_assets'
-  gem "less-rails", "~> 2.3.3"
 end
