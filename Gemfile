@@ -18,7 +18,6 @@ gem 'rmagick'
 gem 'carrierwave'
 gem 'pg'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'ZenTest'
 gem "twitter-bootstrap-rails"
 gem 'bootswatch-rails'
 # Just a faster web server
