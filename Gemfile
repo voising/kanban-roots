@@ -25,6 +25,8 @@ gem 'thin'
 gem "fog", "~> 1.3.1"
 gem "less-rails", "~> 2.3.3"
 
+gem 'newrelic_rpm'
+
 group :assets do
   gem 'therubyracer' # JavaScript runtime. uglifier dependence
   gem 'uglifier'
