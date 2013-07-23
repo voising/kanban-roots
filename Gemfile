@@ -26,6 +26,7 @@ gem "fog", "~> 1.3.1"
 gem "less-rails", "~> 2.3.3"
 
 gem 'newrelic_rpm'
+gem 'unicorn'
 
 group :assets do
   gem 'therubyracer' # JavaScript runtime. uglifier dependence
